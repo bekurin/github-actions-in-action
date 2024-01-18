@@ -1,0 +1,17 @@
+name: trigger using push event
+
+on:
+  workflow-dispatch:
+    inputs:
+      name:
+        description: "set name"
+        required: true
+        default: "bekurin"
+        type: string
+
+jobs:
+  push-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello world
+        run: echo hello ${{ inputs.name }}
