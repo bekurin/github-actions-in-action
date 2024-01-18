@@ -1,7 +1,7 @@
 name: trigger using push event
 
 on:
-  workflow-dispatch:
+  workflow_dispatch:
     inputs:
       name:
         description: "set name"
