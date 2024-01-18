@@ -1,4 +1,4 @@
-name: trigger using push event
+name: trigger using workflow dispatch event
 
 on:
   workflow_dispatch:
