@@ -8,6 +8,6 @@ jobs:
     environment: develop
     steps:
       - name: get var
-        runs: |
+        run: |
           echo ${{ vars.name }}
           echo ${{ vars.secret_key }}
