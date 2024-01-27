@@ -20,3 +20,10 @@ jobs:
         with:
           REF_TYPE: ${{ github.ref_type }}
           BASE_REF: ${{ github.base_ref }}
+  using-environment:
+    runs-on: ubuntu-latest
+    needs: [using-module]
+    strategy:
+      matrix:
+        environment: ["${{ needs.set-environment-outputs.environment }}"]
+    environment: ${{ matrix.environment }}
