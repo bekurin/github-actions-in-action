@@ -11,7 +11,7 @@ jobs:
         run: echo hello-world
   approve:
     runs-on: ubuntu-latest
-    environment: approve-process
+    environment: approval
     needs: [hello-world]
     steps:
       - name: approve
