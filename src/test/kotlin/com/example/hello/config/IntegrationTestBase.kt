@@ -8,7 +8,6 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @SpringBootTest
 @ExtendWith(
     MysqlContainerExtension::class,
-    RedisContainerExtension::class
+    RedisContainerExtension::class,
 )
-class IntegrationTestBase {
-}
+class IntegrationTestBase
