@@ -14,11 +14,12 @@ class MysqlContainerExtension : BeforeAllCallback {
         private const val MYSQL_PORT = 3306
 
         @Container
-        private val mysqlContainer: MySQLContainer<*> = MySQLContainer(MYSQL_VERSION)
-            .withDatabaseName(DATABASE_NAME)
-            .withUsername(USERNAME)
-            .withPassword(PASSWORD)
-            .withExposedPorts(MYSQL_PORT)
+        private val mysqlContainer: MySQLContainer<*> =
+            MySQLContainer(MYSQL_VERSION)
+                .withDatabaseName(DATABASE_NAME)
+                .withUsername(USERNAME)
+                .withPassword(PASSWORD)
+                .withExposedPorts(MYSQL_PORT)
     }
 
     override fun beforeAll(context: ExtensionContext?) {
@@ -28,7 +29,7 @@ class MysqlContainerExtension : BeforeAllCallback {
         mysqlContainer.start()
         System.setProperty(
             "spring.datasource.hikari.jdbc-url",
-            "jdbc:mysql://localhost:${mysqlContainer.getMappedPort(MYSQL_PORT)}/$DATABASE_NAME"
+            "jdbc:mysql://localhost:${mysqlContainer.getMappedPort(MYSQL_PORT)}/$DATABASE_NAME",
         )
         System.setProperty("spring.datasource.hikari.username", USERNAME)
         System.setProperty("spring.datasource.hikari.password", PASSWORD)

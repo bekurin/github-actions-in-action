@@ -11,8 +11,9 @@ class RedisContainerExtension : BeforeAllCallback {
         private const val REDIS_PORT = 6379
 
         @Container
-        private val redisContainer: GenericContainer<*> = GenericContainer(REDIS_VERSION)
-            .withExposedPorts(REDIS_PORT)
+        private val redisContainer: GenericContainer<*> =
+            GenericContainer(REDIS_VERSION)
+                .withExposedPorts(REDIS_PORT)
     }
 
     override fun beforeAll(context: ExtensionContext?) {
