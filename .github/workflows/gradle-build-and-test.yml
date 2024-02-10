@@ -28,6 +28,7 @@ jobs:
         run: ./gradlew clean test
   complete:
     needs: [ktlint-check, run-test]
+    runs-on: ubuntu-latest
     steps:
       - name: echo complete
         run: echo "complete"
