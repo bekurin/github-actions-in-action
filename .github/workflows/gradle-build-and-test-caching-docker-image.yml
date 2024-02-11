@@ -68,7 +68,7 @@ jobs:
           docker load -i ~/.docker/redis.tar
           docker load -i ~/.docker/testcontainers.tar
       - name: execute test
-        run: ./gradlew clean test --debug
+        run: ./gradlew clean test --info
   complete:
     needs: [ktlint-check, run-test]
     runs-on: ubuntu-latest
