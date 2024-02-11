@@ -16,21 +16,16 @@ jobs:
           key: mysql-and-redis-and-testcontainers-image-${{ runner.os }}
           restore-keys: |
             mysql-and-redis-and-testcontainers-image-${{ runner.os }}
-      - name: Pull MySQL Docker Image
+      - name: Pull and save docker images
         if: steps.image-cache.outputs.cache-hit != 'true'
         run: |
           docker pull mysql:8.0
-          docker save -o ~/.docker/mysql.tar mysql:8.0
-      - name: Pull Redis Docker Image
-        if: steps.image-cache.outputs.cache-hit != 'true'
-        run: | 
           docker pull redis:7.0.7
-          docker save -o ~/.docker/redis.tar redis:7.0.7
-      - name: pull testcontainers/ryuk docker image
-        if: steps.image-cache.outputs.cache-hit != 'true'
-        run: |
           docker pull testcontainers/ryuk:0.6.0
+          docker save -o ~/.docker/mysql.tar mysql:8.0
+          docker save -o ~/.docker/redis.tar redis:7.0.7
           docker save -o ~/.docker/testcontainers.tar testcontainers/ryuk:0.6.0
+
   ktlint-check:
     needs: [set-up]
     runs-on: ubuntu-latest
