@@ -13,9 +13,9 @@ jobs:
         with:
           path: |
             ~/.docker
-          key: mysql-and-redis-image-${{ runner.os }}
+          key: mysql-and-redis-and-testcontainers-image-${{ runner.os }}
           restore-keys: |
-            mysql-and-redis-image-${{ runner.os }}
+            mysql-and-redis-and-testcontainers-image-${{ runner.os }}
       - name: Pull MySQL Docker Image
         if: steps.image-cache.outputs.cache-hit != 'true'
         run: |
@@ -54,7 +54,7 @@ jobs:
         with:
           path: |
             ~/.docker
-          key: mysql-and-redis-image-${{ runner.os }}
+          key: mysql-and-redis-and-testcontainers-image-${{ runner.os }}
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
