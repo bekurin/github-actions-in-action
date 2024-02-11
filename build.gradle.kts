@@ -60,5 +60,11 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
+    testLogging {
+        showCauses = true
+        showExceptions = true
+        showStackTraces = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    }
     useJUnitPlatform()
 }
