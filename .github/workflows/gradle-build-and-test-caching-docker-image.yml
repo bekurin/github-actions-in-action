@@ -61,12 +61,12 @@ jobs:
           distribution: 'temurin'
       - name: Grand execute permission for gradlew
         run: chmod +x gradlew
-      - name: Load mysql and redis image in cache
-        if: steps.image-cache.outputs.cache-hit == 'true'
-        run: |
-          docker load -i ~/.docker/mysql.tar
-          docker load -i ~/.docker/redis.tar
-          docker load -i ~/.docker/testcontainers.tar
+#      - name: Load mysql and redis and testcontainers image in cache
+#        if: steps.image-cache.outputs.cache-hit == 'true'
+#        run: |
+#          docker load -i ~/.docker/mysql.tar
+#          docker load -i ~/.docker/redis.tar
+#          docker load -i ~/.docker/testcontainers.tar
       - name: execute test
         run: ./gradlew clean test --info
   complete:
