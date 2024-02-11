@@ -37,7 +37,7 @@ jobs:
           docker pull redis:7.0.7
           docker pull mysql:8.0
       - name: execute test
-        run: ./gradlew clean test
+        run: ./gradlew clean test --debug
   complete:
     needs: [ktlint-check, run-test]
     runs-on: ubuntu-latest
