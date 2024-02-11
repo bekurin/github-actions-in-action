@@ -40,6 +40,7 @@ jobs:
       - uses: actions/cache@v4
         id: image-cache
         with:
+          path: ~/image-cache
           key: image-cache-${{ runner.os }}
       - uses: actions/setup-java@v4
         with:
