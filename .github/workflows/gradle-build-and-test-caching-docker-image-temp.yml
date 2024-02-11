@@ -1,4 +1,4 @@
-name: gradle build test caching docker image
+name: gradle build test caching docker image temp
 
 on:
   workflow_dispatch:
@@ -8,24 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        id: image-cache
-        with:
-          path: |
-            ~/.docker
-          key: mysql-and-redis-image-${{ runner.os }}
-          restore-keys: |
-            mysql-and-redis-image-${{ runner.os }}
-      - name: Pull MySQL Docker Image
-        if: steps.image-cache.outputs.cache-hit != 'true'
-        run: |
-          docker pull mysql:8.0
-          docker save -o ~/.docker/mysql.tar mysql:8.0
-      - name: Pull Redis Docker Image
-        if: steps.image-cache.outputs.cache-hit != 'true'
-        run: | 
-          docker pull redis:7.0.7
-          docker save -o ~/.docker/redis.tar redis:7.0.7
   ktlint-check:
     needs: [set-up]
     runs-on: ubuntu-latest
@@ -44,12 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        id: image-cache
-        with:
-          path: |
-            ~/.docker
-          key: mysql-and-redis-image-${{ runner.os }}
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -57,10 +33,9 @@ jobs:
       - name: Grand execute permission for gradlew
         run: chmod +x gradlew
       - name: Load mysql and redis image in cache
-        if: steps.image-cache.outputs.cache-hit == 'true'
         run: |
-          docker load -i ~/.docker/mysql.tar
-          docker load -i ~/.docker/redis.tar
+          docker pull redis:7.0.7
+          docker pull mysql:8.0
       - name: execute test
         run: ./gradlew clean test
   complete:
