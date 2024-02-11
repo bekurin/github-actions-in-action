@@ -18,12 +18,12 @@ jobs:
         if: steps.image-cache.outputs.cache-hit != 'true'
         run: |
           docker pull mysql:8.0
-          docker save -o mysql.tar mysql:8.0
+          docker save -o ~/.docker/mysql.tar mysql:8.0
       - name: Pull Redis Docker Image
         if: steps.image-cache.outputs.cache-hit != 'true'
         run: | 
           docker pull redis:7.0.7
-          docker save -o redis.tar redis:7.0.7
+          docker save -o ~/.docker/redis.tar redis:7.0.7
   ktlint-check:
     needs: [set-up]
     runs-on: ubuntu-latest
