@@ -55,7 +55,7 @@ jobs:
       - name: Grand execute permission for gradlew
         run: chmod +x gradlew
       - name: Load mysql and redis image in cache
-        if: steps.image-cache.outputs.cache-hit != 'true'
+        if: steps.image-cache.outputs.cache-hit == 'true'
         run: |
           docker load -i ~/.docker/mysql.tar
           docker load -i ~/.docker/redis.tar
