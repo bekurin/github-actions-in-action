@@ -13,16 +13,17 @@ jobs:
         with:
           path: |
             ~/.docker
-          key: ${{ runner.os }}-docker-${{ hashFiles('**/Dockerfile*', '**/docker-compose.yml') }}
+          key: ${{ runner.os }}-docker
       - name: Pull MySQL Docker Image
         if: steps.image-cache.outputs.cache-hit != 'true'
-        run: docker pull mysql:8.0
+        run: |
+          docker pull mysql:8.0
+          docker save -o mysql.tar mysql:8.0
       - name: Pull Redis Docker Image
         if: steps.image-cache.outputs.cache-hit != 'true'
-        run: docker pull redis:7.0.7
-      - name: Pull testcontainers/ryuk Docker Image
-        if: steps.image-cache.outputs.cache-hit != 'true'
-        run: docker pull testcontainers/ryuk:0.6.0
+        run: | 
+          docker pull redis:7.0.7
+          docker save -o redis.tar redis:7.0.7
   ktlint-check:
     needs: [set-up]
     runs-on: ubuntu-latest
@@ -42,16 +43,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
+        id: image-cache
         with:
           path: |
             ~/.docker
-          key: ${{ runner.os }}-docker-${{ hashFiles('**/Dockerfile*', '**/docker-compose.yml') }}
+          key: ${{ runner.os }}-docker
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
       - name: Grand execute permission for gradlew
         run: chmod +x gradlew
+      - name: Load mysql and redis image in cache
+        if: steps.image-cache.outputs.cache-hit != 'true'
+        run: |
+          docker load -i ~/.docker/mysql.tar
+          docker load -i ~/.docker/redis.tar
       - name: execute test
         run: ./gradlew clean test
   complete:
