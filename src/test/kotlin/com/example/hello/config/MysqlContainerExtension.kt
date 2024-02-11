@@ -7,7 +7,7 @@ import org.testcontainers.junit.jupiter.Container
 
 class MysqlContainerExtension : BeforeAllCallback {
     companion object {
-        private const val MYSQL_VERSION = "mysql:latest"
+        private const val MYSQL_VERSION = "mysql:8.0"
         private const val DATABASE_NAME = "test"
         private const val USERNAME = "username"
         private const val PASSWORD = "password"

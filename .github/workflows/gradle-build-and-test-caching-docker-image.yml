@@ -1,0 +1,57 @@
+name: gradle build test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  set-up:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        id: image-cache
+        with:
+          path: ~/image-cache
+          key: image-cache-${{ runner.os }}
+      - name: Pull MySQL Docker Image
+        if: steps.image-cache.outputs.cache-hit != 'true'
+        run: docker pull mysql:8.0
+      - name: Pull Redis Docker Image
+        if: steps.image-cache.outputs.cache-hit != 'true'
+        run: docker pull redis:7.0.7
+  ktlint-check:
+    needs: [set-up]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grand execute permission for gradlew
+        run: chmod +x gradlew
+      - name: ktlint check
+        run: ./gradlew clean ktlintCheck
+  run-test:
+    needs: [set-up]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        id: image-cache
+        with:
+          key: image-cache-${{ runner.os }}
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grand execute permission for gradlew
+        run: chmod +x gradlew
+      - name: execute test
+        run: ./gradlew clean test
+  complete:
+    needs: [ktlint-check, run-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo complete
+        run: echo "complete"
