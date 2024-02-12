@@ -25,7 +25,6 @@ jobs:
           docker save -o ~/.docker/mysql.tar mysql:8.0
           docker save -o ~/.docker/redis.tar redis:7.0.7
           docker save -o ~/.docker/testcontainers.tar testcontainers/ryuk:0.6.0
-
   ktlint-check:
     needs: [set-up]
     runs-on: ubuntu-latest
