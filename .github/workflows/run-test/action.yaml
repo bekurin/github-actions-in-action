@@ -7,7 +7,7 @@ inputs:
     description: 'java version (ex. 17, 21)'
     required: true
     default: '17'
-  DISTRIBUTIN:
+  DISTRIBUTION:
     description: 'distribution'
     required: true
     default: 'temurin'
@@ -21,11 +21,11 @@ runs:
       with:
         path: |
           ~/.docker
-        key: mysql-and-redis-and-testcontainers-image-${{ runner.os }}
+        key: docker-image-${{ runner.os }}
     - uses: actions/setup-java@v4
       with:
         java-version: ${{ inputs.JAVA_VERSION }}
-        distribution: ${{ inputs.DISTRIBUTIN }}
+        distribution: ${{ inputs.DISTRIBUTION }}
     - name: Grand execute permission for gradlew
       shell: bash
       run: chmod +x gradlew
