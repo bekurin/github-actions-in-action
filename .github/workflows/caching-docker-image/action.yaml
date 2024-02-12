@@ -1,3 +1,4 @@
+# mysql, redis, testcontainers 각각 cache를 만들어야한다.
 name: caching-docker-image
 author: bekurin
 description: 'caching docker image'

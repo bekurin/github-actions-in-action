@@ -1,4 +1,5 @@
-name: 'typescript echo action'
+# using: node를 사용하면 추가적인 step 정의는 할 수 없다.
+name: 'javascript echo action'
 author: bekurin
 description: 'echo input message'
 
