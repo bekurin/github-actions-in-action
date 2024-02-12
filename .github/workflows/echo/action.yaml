@@ -10,4 +10,4 @@ inputs:
 
 runs:
   using: node20
-  main: 'action.ts'
+  main: 'action.js'
