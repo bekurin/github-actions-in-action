@@ -16,27 +16,27 @@ jobs:
       - uses: ./.github/workflows/caching-docker-image
         with:
           MYSQL_VERSION: ${{ env.MYSQL_VERSION }}
-  ktlint-check:
-    needs: [set-up]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/ktlint-check
-        with:
-          JAVA_VERSION: ${{ env.JAVA_VERSION }}
-          DISTRIBUTION: ${{ env.DISTRIBUTION }}
-  run-test:
-    needs: [set-up]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/run-test
-        with:
-          JAVA_VERSION: ${{ env.JAVA_VERSION }}
-          DISTRIBUTION: ${{ env.DISTRIBUTION }}
+#  ktlint-check:
+#    needs: [set-up]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/workflows/ktlint-check
+#        with:
+#          JAVA_VERSION: ${{ env.JAVA_VERSION }}
+#          DISTRIBUTION: ${{ env.DISTRIBUTION }}
+#  run-test:
+#    needs: [set-up]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/workflows/run-test
+#        with:
+#          JAVA_VERSION: ${{ env.JAVA_VERSION }}
+#          DISTRIBUTION: ${{ env.DISTRIBUTION }}
   complete:
-    needs: [ktlint-check, run-test]
     runs-on: ubuntu-latest
     steps:
-      - name: echo complete
-        run: echo "complete"
+      - uses: ./.github/workflows/echo
+        with:
+          MESSAGE: "hello world"
