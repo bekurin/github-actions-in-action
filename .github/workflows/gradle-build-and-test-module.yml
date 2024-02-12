@@ -12,6 +12,7 @@ jobs:
   set-up:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/workflows/caching-docker-image
         with:
           MYSQL_VERSION: ${{ env.MYSQL_VERSION }}
@@ -19,6 +20,7 @@ jobs:
     needs: [set-up]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/workflows/ktlint-check
         with:
           JAVA_VERSION: ${{ env.JAVA_VERSION }}
@@ -27,6 +29,7 @@ jobs:
     needs: [set-up]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/workflows/run-test
         with:
           JAVA_VERSION: ${{ env.JAVA_VERSION }}
