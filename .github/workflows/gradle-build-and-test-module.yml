@@ -35,6 +35,7 @@ jobs:
           JAVA_VERSION: ${{ env.JAVA_VERSION }}
           DISTRIBUTION: ${{ env.DISTRIBUTION }}
   complete:
+    needs: [run-test, ktlint-check]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
