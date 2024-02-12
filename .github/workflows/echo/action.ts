@@ -1,3 +1,4 @@
+// @ts-ignore
 import core from "@actions/core";
 
 try {
