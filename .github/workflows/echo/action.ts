@@ -1,5 +1,4 @@
-// @ts-ignore
-import core from "@actions/core";
+import * as core from '@actions/core'
 
 try {
     const message = core.getInput("MESSAGE")
