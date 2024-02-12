@@ -32,15 +32,15 @@ runs:
       if: steps.image-cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
-        if [[ -n ${{ inputs.MYSQL_VERSION }} ]]; then
+        if [ -n ${{ inputs.MYSQL_VERSION }} ]; then
           docker pull mysql:${{ inputs.MYSQL_VERSION }}
           docker save -o ~/.docker/mysql.tar mysql:${{ inputs.MYSQL_VERSION }}
         fi
-        if [[ -n ${{ inputs.REDIS_VERSION }} ]]; then
+        if [ -n ${{ inputs.REDIS_VERSION }} ]; then
           docker pull redis:${{ inputs.REDIS_VERSION }}
           docker save -o ~/.docker/redis.tar redis:${{ inputs.REDIS_VERSION }}
         fi
-        if [[ -n ${{ inputs.TESTCONTAINERS_VERSION }} ]]; then
+        if [ -n ${{ inputs.TESTCONTAINERS_VERSION }} ]; then
           docker pull testcontainers/ryuk:${{ inputs.TESTCONTAINERS_VERSION }}
           docker save -o ~/.docker/testcontainers.tar mysql:${{ inputs.TESTCONTAINERS_VERSION }}
         fi
