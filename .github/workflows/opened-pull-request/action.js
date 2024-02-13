@@ -15,6 +15,7 @@ try {
         sort: "updated",
         direction: "desc"
     });
+    console.log(`owner: ${owner}, repo: ${repo}, client: ${client}`)
     console.log(pullRequests)
 } catch (error) {
     core.setFailed(error.message)
