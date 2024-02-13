@@ -15,3 +15,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - uses: ./.github/workflows/opened-pull-request
+        with:
+          REVIEW_REMIND_TOKEN: ${{ secrets.REVIEW_REMIND_TOKEN }}
