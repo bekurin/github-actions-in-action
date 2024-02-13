@@ -15,7 +15,7 @@ async function run() {
         sort: "updated",
         direction: "desc"
     });
-    console.log(`owner: ${owner}, repo: ${repo}, client: ${client}`)
+    console.log(`owner: ${owner}, repo: ${repo}, octokit: ${octokit}`)
     console.log(pullRequests)
 }
 
