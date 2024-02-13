@@ -6,7 +6,7 @@ try {
     const repo = github.context.repo.repo;
 
     const githubClient = github.getOctokit(process.env.GITHUB_TOKEN);
-    const {data: pullRequests} = await githubClient.rest.pulls.list({
+    const {data: pullRequests} = githubClient.rest.pulls.list({
         owner,
         repo,
         state: "open",
