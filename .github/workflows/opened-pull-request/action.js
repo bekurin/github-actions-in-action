@@ -6,8 +6,8 @@ try {
     const repo = github.context.repo.repo;
     const token = core.getInput("REVIEW_REMIND_TOKEN")
 
-    const githubClient = github.getOctokit(token);
-    const {data: pullRequests} = githubClient.rest.pulls.list({
+    const {rest: client} = github.getOctokit(token);
+    const {data: pullRequests} = client.pulls.list({
         owner,
         repo,
         state: "open",
