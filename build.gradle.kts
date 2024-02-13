@@ -48,6 +48,7 @@ dependencies {
 ktlint {
     enableExperimentalRules.set(false)
     filter {
+
         exclude { projectDir.toURI().relativize(it.file.toURI()).path.contains("/generated/") }
     }
 }
