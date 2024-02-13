@@ -16,7 +16,9 @@ async function run() {
         direction: "desc"
     });
     console.log(`owner: ${owner}, repo: ${repo}, octokit: ${octokit}`)
-    console.log(pullRequests)
+    pullRequests.flatMap(value => {
+        console.log(`url: ${value.html_url}, title: ${value.title}`)
+    })
 }
 
 run();
