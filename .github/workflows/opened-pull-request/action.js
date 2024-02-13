@@ -1,13 +1,13 @@
 const github = require("@actions/github")
 const core = require("@actions/core")
 
-try {
+async function run() {
     const owner = github.context.repo.owner;
     const repo = github.context.repo.repo;
     const token = core.getInput("REVIEW_REMIND_TOKEN")
 
-    const {rest: client} = github.getOctokit(token);
-    const {data: pullRequests} = client.pulls.list({
+    const octokit = github.getOctokit(myToken)
+    const {data: pullRequests} = await octokit.rest.pulls.list({
         owner,
         repo,
         state: "open",
@@ -17,6 +17,6 @@ try {
     });
     console.log(`owner: ${owner}, repo: ${repo}, client: ${client}`)
     console.log(pullRequests)
-} catch (error) {
-    core.setFailed(error.message)
 }
+
+run();
