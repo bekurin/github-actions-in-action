@@ -31,31 +31,12 @@ async function getMessages(pullRequests) {
     return pullRequests.map((pr) => {
         const {title, html_url, user: {login}, created_at} = pr
         const elapsedDate = new Date() - new Date(created_at)
-        return {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": `제목: <${html_url}|${title}>\nPR 생성자: ${login}\n리뷰하러 가기: <${html_url}|바로가기>\n경과시간: ${Math.floor(elapsedDate / (1000 * 60 * 60 * 24))}일 전에 생성됨.\n\n`
-            }
-        };
+        return `제목: <${html_url}|${title}>\nPR 생성자: ${login}\n리뷰하러 가기: <${html_url}|바로가기>\n경과시간: ${Math.floor(elapsedDate / (1000 * 60 * 60 * 24))}일 전에 생성됨.\n\n`
     });
 }
 
 async function sendMessage(webHookUrl, messages) {
-    const blocks = [
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "리뷰 부탁드립니다."
-            }
-        },
-        ...messages
-    ];
-    const message = {
-        "blocks": blocks
-    };
-    console.log(`send messages: ${message}`)
+    console.log(`send messages: ${messages}`)
 }
 
 run().then(r => console.log(r)).catch(e => core.setFailed(e));
