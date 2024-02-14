@@ -9,10 +9,11 @@ async function run() {
         const token = core.getInput("REVIEW_REMIND_TOKEN");
         const webHookUrl = core.getInput("WEBHOOK_URL");
         const octokit = github.getOctokit(token);
-        repositories.map(async (repository) => {
+        repositories.map(async (repo) => {
+            console.log(`owner: ${owner}, repo: ${repo}`)
             const {data: pullRequests} = await octokit.rest.pulls.list({
                 owner,
-                repository,
+                repo,
                 state: "open",
                 per_page: 100,
                 sort: "updated",
@@ -20,7 +21,7 @@ async function run() {
             });
             const messages = await getMessages(pullRequests);
             await sendMessage(webHookUrl, messages);
-        })
+        });
     } catch (error) {
         core.setFailed(error.message);
     }
